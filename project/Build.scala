@@ -1,7 +1,7 @@
 import sbt._
 import sbt.Keys._
 
-object PhpSerDataBuild extends Build {
+object Build extends sbt.Build {
   val baseSettings = Project.defaultSettings ++ Seq(
     scalaVersion := "2.10.2",
     scalacOptions ++= Seq("-feature", "-deprecation")
@@ -20,7 +20,7 @@ object PhpSerDataBuild extends Build {
       ),
       libraryDependencies ++= Seq(
         "org.scalatest" %% "scalatest" % "1.9.2" % "test",
-        "commons-lang" % "commons-lang" % "2.6"
+        "org.apache.commons" % "commons-lang3" % "3.1"
       )
     )
   )

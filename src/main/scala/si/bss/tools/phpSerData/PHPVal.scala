@@ -1,6 +1,6 @@
 package si.bss.tools.phpSerData
 
-import org.apache.commons.lang.StringEscapeUtils.escapeJava
+import org.apache.commons.lang3.StringEscapeUtils.escapeJava
 import util.Try
 
 /**
