@@ -43,9 +43,9 @@ class PHPValWritesTest extends FunSuite {
   test("Writes List") {
     val value = List("one", "two", "three")
     val should = PHPArray(List(
-                    (PHPInt(0) -> PHPString("one")),
-                    (PHPInt(1) -> PHPString("two")),
-                    (PHPInt(2) -> PHPString("three"))
+                    PHPInt(0) -> PHPString("one"),
+                    PHPInt(1) -> PHPString("two"),
+                    PHPInt(2) -> PHPString("three")
                 ))
 
     val writen = PHPVal.toPHPVal(value)
@@ -53,10 +53,10 @@ class PHPValWritesTest extends FunSuite {
   }
 
   test("Writes Map (assoc array)") {
-    val value = Map( ("zero" -> "smth0"), ("one" -> "smth1") )
+    val value = Map("zero" -> "smth0", "one" -> "smth1")
     val should = PHPArray(List(
-      (PHPString("zero") -> PHPString("smth0")),
-      (PHPString("one") -> PHPString("smth1"))
+      PHPString("zero") -> PHPString("smth0"),
+      PHPString("one") -> PHPString("smth1")
     ))
 
     val writen = PHPVal.toPHPVal(value)
@@ -71,15 +71,15 @@ class PHPValWritesTest extends FunSuite {
     implicit val writeTestWrites = new Writes[WriteTest] {
       def writes(o: WriteTest): PHPValue = {
         PHPArray(List(
-          (PHPString("a") -> PHPInt(o.a)),
-          (PHPString("b") -> PHPString(o.b))
+          PHPString("a") -> PHPInt(o.a),
+          PHPString("b") -> PHPString(o.b)
         ))
       }
     }
 
     val should = PHPArray(List(
-                  (PHPString("a") -> PHPInt(123)),
-                  (PHPString("b") -> PHPString("onetwothree"))
+                  PHPString("a") -> PHPInt(123),
+                  PHPString("b") -> PHPString("onetwothree")
                 ))
 
     val writen = PHPVal.toPHPVal(value)

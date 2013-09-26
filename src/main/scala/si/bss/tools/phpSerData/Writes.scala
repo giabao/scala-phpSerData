@@ -36,7 +36,7 @@ trait DefaultWrites {
   implicit def SeqWrites[A: Writes] = new Writes[Seq[A]] {
     def writes(o: Seq[A]): PHPValue = {
       PHPArray {
-        o.zipWithIndex.map(el => (PHPInt(el._2) -> PHPVal.toPHPVal[A](el._1)))
+        o.zipWithIndex.map(el => PHPInt(el._2) -> PHPVal.toPHPVal[A](el._1))
       }
     }
   }
@@ -44,7 +44,7 @@ trait DefaultWrites {
   implicit def MapWrites[A: Writes] = new Writes[Map[String, A]] {
     def writes(o: Map[String, A]): PHPValue = {
       PHPArray {
-        o.toSeq.map(el => (PHPString(el._1) -> PHPVal.toPHPVal[A](el._2)))
+        o.toSeq.map(el => PHPString(el._1) -> PHPVal.toPHPVal[A](el._2))
       }
     }
   }

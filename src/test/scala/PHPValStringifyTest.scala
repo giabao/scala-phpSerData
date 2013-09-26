@@ -31,14 +31,14 @@ class PHPValStringifyTest extends  FunSuite {
   }
 
   test("Array Serialization") {
-    val phpvalue = PHPArray(List( (PHPInt(0) -> PHPDouble(5)), (PHPInt(1) -> PHPDouble(6)) ))
+    val phpvalue = PHPArray(List(PHPInt(0) -> PHPDouble(5), PHPInt(1) -> PHPDouble(6)))
     val strshould = """a:2:{i:0;d:5.0;i:1;d:6.0;}"""
     val strgot = PHPVal.stringify(phpvalue)
     assert(strgot == strshould)
   }
 
   test("Associative array Serialization") {
-    val phpvalue = PHPArray(List( (PHPString("one") -> PHPDouble(5)), (PHPString("two") -> PHPDouble(6)) ))
+    val phpvalue = PHPArray(List(PHPString("one") -> PHPDouble(5), PHPString("two") -> PHPDouble(6)))
     val strshould = """a:2:{s:3:"one";d:5.0;s:3:"two";d:6.0;}"""
     val strgot = PHPVal.stringify(phpvalue)
     assert(strgot == strshould)

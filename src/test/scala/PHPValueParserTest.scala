@@ -50,7 +50,7 @@ class PHPValueParserTest extends FunSuite {
   }
 
   test("Parsing Associative Array") {
-    val should = PHPArray(List( (PHPString("one") -> PHPDouble(5)), (PHPString("two") -> PHPDouble(6)) ))
+    val should = PHPArray(List(PHPString("one") -> PHPDouble(5), PHPString("two") -> PHPDouble(6)))
     val string = """a:2:{s:3:"one";d:5.0;s:3:"two";d:6.0;}"""
     val parsed = PHPValParser.parseAll(PHPValParser.phpvalue, string)
 

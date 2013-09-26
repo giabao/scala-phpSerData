@@ -80,7 +80,7 @@ trait DefaultReads {
         case PHPArray(a) => Try {
           a.map {
             case (key, value) => {
-              (PHPVal.fromPHPVal[K](key).get -> PHPVal.fromPHPVal[V](value).get)
+              PHPVal.fromPHPVal[K](key).get -> PHPVal.fromPHPVal[V](value).get
             }
           }.toMap
         }

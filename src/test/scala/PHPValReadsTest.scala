@@ -49,9 +49,9 @@ class PHPValReadsTest extends FunSuite {
   test("List reads") {
     val should = List("one", "two", "three")
     val value = PHPArray(List(
-      (PHPInt(0) -> PHPString("one")),
-      (PHPInt(1) -> PHPString("two")),
-      (PHPInt(2) -> PHPString("three"))
+      PHPInt(0) -> PHPString("one"),
+      PHPInt(1) -> PHPString("two"),
+      PHPInt(2) -> PHPString("three")
     ))
 
     val read = PHPVal.fromPHPVal[Seq[String]](value)
@@ -60,10 +60,10 @@ class PHPValReadsTest extends FunSuite {
   }
 
   test("Map (assoc array) reads") {
-    val should = Map( ("zero" -> "smth0"), ("one" -> "smth1") )
+    val should = Map("zero" -> "smth0", "one" -> "smth1")
     val value = PHPArray(List(
-      (PHPString("zero") -> PHPString("smth0")),
-      (PHPString("one") -> PHPString("smth1"))
+      PHPString("zero") -> PHPString("smth0"),
+      PHPString("one") -> PHPString("smth1")
     ))
 
     val read = PHPVal.fromPHPVal[Map[String,String]](value)
@@ -97,8 +97,8 @@ class PHPValReadsTest extends FunSuite {
     }
 
     val value = PHPArray(List(
-      (PHPString("a") -> PHPInt(123)),
-      (PHPString("b") -> PHPString("onetwothree"))
+      PHPString("a") -> PHPInt(123),
+      PHPString("b") -> PHPString("onetwothree")
     ))
 
     val read = PHPVal.fromPHPVal[ReadsTest](value)

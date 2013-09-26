@@ -18,11 +18,9 @@ object PHPVal {
       case s: PHPString => "s:"+s.s.length+":"+'"'+escapeString(s.s)+'"'+";"
       case a: PHPArray => {
         "a:"+a.a.length + ":{"+
-        (
-          a.a.map {
-            case (i,v) => stringify(i)+stringify(v)
-          }.mkString
-        )+"}"
+        a.a.map {
+          case (i, v) => stringify(i) + stringify(v)
+        }.mkString +"}"
       }
 
     }
@@ -30,28 +28,30 @@ object PHPVal {
 
   def prettyPrint(value: PHPValue, depth: Int = 0): String = {
 
-    (value match {
-      case i: PHPInt => "PHPInt("+i.i+")"
-      case d: PHPDouble => "PHPDouble("+d.d+")"
-      case s: PHPString => "PHPString("+'"'+escapeString(s.s)+'"'+")"
+    value match {
+      case i: PHPInt => "PHPInt(" + i.i + ")"
+      case d: PHPDouble => "PHPDouble(" + d.d + ")"
+      case s: PHPString => "PHPString(" + '"' + escapeString(s.s) + '"' + ")"
       case a: PHPArray => {
-        "PHPArray {\n"+
-          (a.a.map {
-            case (key, value) => {
-              val header = "  " * (depth + 1) + prettyPrint(key) + " => "
-              val vals = prettyPrint(value,depth + 1).lines.toList
+        "PHPArray {\n" +
+          a.a.map {
+            case (k, v) => {
+              val header = "  " * (depth + 1) + prettyPrint(k) + " => "
+              val vals = prettyPrint(v, depth + 1).lines.toList
               header + vals.head +
-              (
-                if (vals.tail.length > 0) {
-                  "\n" + vals.tail.mkString("\n"+"  "*(depth))
-                } else { "" }
-              )
+                (
+                  if (vals.tail.length > 0) {
+                    "\n" + vals.tail.mkString("\n" + "  " * depth)
+                  } else {
+                    ""
+                  }
+                  )
             }
-          }.mkString(",\n"))+
-          "\n"+"  "*depth +"}"
+          }.mkString(",\n") +
+          "\n" + "  " * depth + "}"
       }
 
-    })
+    }
   }
 
   def escapeString(s: String): String = {
